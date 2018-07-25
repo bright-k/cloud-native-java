@@ -4,6 +4,7 @@ import com.google.common.util.concurrent.RateLimiter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,7 +32,7 @@ public class RateLimiterZuulInboundFilter extends ZuulFilter {
 
     @Override
     public String filterType() {
-        return "pre";
+        return FilterConstants.PRE_TYPE;
     }
 
     @Override
@@ -41,7 +42,7 @@ public class RateLimiterZuulInboundFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
-        return true;
+        return RequestContext.getCurrentContext().getRequest().getRequestURI().contains("greet");
     }
 
     @Override

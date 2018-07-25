@@ -3,7 +3,6 @@ package proxy;
 import com.netflix.zuul.exception.ZuulException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.VndErrors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,6 @@ public class ProxyExceptionHandlers {
 
     @ExceptionHandler(ZuulException.class)
     public ResponseEntity<VndErrors> zuulExceptionHandler(ZuulException ze) {
-        System.out.println("ZE ZuulException ");
         return error(ze, HttpStatus.resolve(ze.nStatusCode), ze.errorCause);
     }
 
@@ -35,7 +33,6 @@ public class ProxyExceptionHandlers {
 
     private ResponseEntity<VndErrors> error(Exception e, HttpStatus httpStatus, String logRef) {
         String msg = Optional.of(e.getMessage()).orElse(e.getClass().getSimpleName());
-        Link link = Link.valueOf("http://localhost:8080");
-        return new ResponseEntity<VndErrors>(new VndErrors(logRef, msg, link), httpStatus);
+        return new ResponseEntity<VndErrors>(new VndErrors(logRef, msg), httpStatus);
     }
 }
