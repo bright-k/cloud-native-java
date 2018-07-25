@@ -5,6 +5,11 @@ spring:
     user:
       name: admin
       password: password
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations: ${spring.config.location},${spring.config.additional-location}
 
 #management:
 #  endpoints:
@@ -35,6 +40,8 @@ zuul:
   SendErrorFilter:
     error:
       disable: true
+  RateLimiterFilter:
+    enabled: true
   include-debug-header: true
   debug:
     request: true

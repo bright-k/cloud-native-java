@@ -4,6 +4,8 @@ import com.google.common.util.concurrent.RateLimiter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpStatus;
@@ -19,7 +21,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 @Service
+@RefreshScope
 public class RateLimiterZuulInboundFilter extends ZuulFilter {
+
+    @Value("${zuul.RateLimiterFilter.enabled:true}")
+    private Boolean filterEnabled;
 
     private final HttpStatus tooManyRequests = HttpStatus.TOO_MANY_REQUESTS;
 
@@ -42,7 +48,7 @@ public class RateLimiterZuulInboundFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
-        return RequestContext.getCurrentContext().getRequest().getRequestURI().contains("greet");
+        return filterEnabled && RequestContext.getCurrentContext().getRequest().getRequestURI().contains("greet");
     }
 
     @Override
