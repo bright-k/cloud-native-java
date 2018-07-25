@@ -34,7 +34,7 @@ eureka:
 zuul:
   SendErrorFilter:
     error:
-      disable: false
+      disable: true
   include-debug-header: true
   debug:
     request: true
