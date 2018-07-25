@@ -21,3 +21,7 @@ eureka:
     registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: http://admin:password@localhost:8061/eureka/
+
+logging:
+  level:
+    greetings: DEBUG

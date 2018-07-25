@@ -1,0 +1,68 @@
+spring:
+  application:
+    name: proxy-service
+  security:
+    user:
+      name: admin
+      password: password
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: **
+
+server:
+  port: 8080
+  error:
+    whitelabel:
+      enabled: false
+
+eureka:
+  instance:
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+    leaseRenewalIntervalInSeconds: 5
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    region: default
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://admin:password@localhost:8061/eureka/
+
+zuul:
+  SendErrorFilter:
+    error:
+      disable: true
+  include-debug-header: true
+  debug:
+    request: true
+  routes:
+    greeting-service:
+      path: /greet/**
+      url: http://localhost:8081
+      stripPrefix: false
+
+greeting-service:
+  ribbon:
+    eureka:
+      enabled: true
+#    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+#    listOfServers: http://localhost:8081
+    ConnectTimeout: 1000
+    ReadTimeout: 3000
+    MaxTotalHttpConnections: 500
+    MaxConnectionsPerHost: 100
+
+logging:
+  level:
+    com:
+      netflix:
+        zuul: DEBUG
+    org:
+      springframework:
+        cloud:
+          netflix:
+            zuul: DEBUG
