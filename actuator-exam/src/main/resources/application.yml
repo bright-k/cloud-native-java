@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: actuator-exam
+  security:
+    user:
+      name: admin
+      password: password
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations: ${spring.config.location},${spring.config.additional-location}
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: **
+
+server:
+  port: 8080
+  error:
+    whitelabel:
+      enabled: false
+
+logging:
+  level:
+    root: INFO

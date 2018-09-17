@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by H on 2018. 7. 23.
  */
 
-@FeignClient(name = "greeting-service", url = "http://localhost:8081")
+@FeignClient(name = "greeting-service")
 public interface GreetingClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/greet/{name}")

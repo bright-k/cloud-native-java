@@ -26,15 +26,9 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:2.0.3.RELEASE")
 
-//    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-oauth2', version: '2.0.0.RELEASE'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter', version: '2.0.0.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.0.3.RELEASE'
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-netflix-eureka-server', version: '2.0.0.RELEASE'
-//    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.0.0.RELEASE'
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-zuul', version: '2.0.0.RELEASE'
-    compile group: 'com.netflix.ribbon', name: 'ribbon-eureka', version: '2.3.0'
-//    compile group: 'com.netflix.zuul', name: 'zuul-core', version: '2.1.2'
-    compile group: 'org.springframework.hateoas', name: 'spring-hateoas', version: '0.24.0.RELEASE'
+    
 //    compile group: 'io.dropwizard.metrics', name: 'metrics-core', version: '4.0.3'
 //    compile group: 'io.micrometer', name: 'micrometer-spring-legacy', version: '0.12.0.RELEASE'
     compile group: 'pl.project13.maven', name: 'git-commit-id-plugin', version: '2.2.1'

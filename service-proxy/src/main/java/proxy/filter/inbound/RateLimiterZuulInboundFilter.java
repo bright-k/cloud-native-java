@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 @RefreshScope
 public class RateLimiterZuulInboundFilter extends ZuulFilter {
 
-    @Value("${zuul.RateLimiterFilter.enabled:true}")
+    @Value("${zuul.RateLimiterFilter.enabled: true}")
     private Boolean filterEnabled;
 
     private final HttpStatus tooManyRequests = HttpStatus.TOO_MANY_REQUESTS;
@@ -60,7 +60,7 @@ public class RateLimiterZuulInboundFilter extends ZuulFilter {
             if(!rateLimiter.tryAcquire()) {
                 response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
                 response.setStatus(tooManyRequests.value());
-//                response.getWriter().append(tooManyRequests.getReasonPhrase());
+                response.getWriter().append(tooManyRequests.getReasonPhrase());
 
                 currentContext.setSendZuulResponse(false);
 
