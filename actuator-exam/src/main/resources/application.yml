@@ -17,6 +17,19 @@ spring:
 #      exposure:
 #        include: **
 
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      path-mapping:
+        health: health
+      exposure:
+#        include:
+#        exclude:
+  endpoint:
+    health:
+      show-details: always
+
 server:
   port: 8080
   error:
@@ -26,3 +39,6 @@ server:
 logging:
   level:
     root: INFO
+    org:
+      springframework: INFO
+    actuator: DEBUG

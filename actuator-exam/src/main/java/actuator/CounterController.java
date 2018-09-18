@@ -32,6 +32,5 @@ public class CounterController {
     public void get() {
         counter.increment();
         gauge.set(counter.count());
-
     }
 }
