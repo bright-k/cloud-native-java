@@ -10,6 +10,10 @@ spring:
       server:
         native:
           searchLocations: ${spring.config.location},${spring.config.additional-location}
+  sleuth:
+    enabled: true
+    sampler:
+      probability: 1.0
 
 #management:
 #  endpoints:
@@ -40,5 +44,7 @@ logging:
   level:
     root: INFO
     org:
-      springframework: INFO
+      springframework:
+        web:
+          client: TRACE
     actuator: DEBUG
