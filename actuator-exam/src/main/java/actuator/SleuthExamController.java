@@ -1,5 +1,6 @@
 package actuator;
 
+import brave.Tracer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
@@ -32,6 +33,9 @@ public class SleuthExamController {
 
     @Autowired
     private BeanFactory beanFactory;
+
+    @Autowired
+    private Tracer tracer;
 
     private Executor executor;
 
